@@ -1,7 +1,3 @@
-##### THIS FILE IS BEING CURRENTLY MANAGED BY URXVTCONFIG #####
-##### CHANGES DONE TO THIS FILE MANUALLY MAY AFFECT THE FUNCTIONALITY ######
-##### PROCEED WITH CAUTION! #####
-
 ! special colors
 *.foreground:  #93a1a1
 *.background:  #002b36
@@ -39,8 +35,7 @@ URxvt*transparent:       false
 URxvt*depth: 32
 URxvt.background: [90]#002b36
 
-#URxvt.font: xft:Noto Sans Mono:pixelsize=12
-URxvt.font: xft:System San Francisco Display:pixelsize=12
+URxvt.font: xft:Terminus:pixelsize=12
 URxvt.letterSpace: 0
 
 *antialias:  false
