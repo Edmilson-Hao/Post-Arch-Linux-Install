@@ -2,7 +2,7 @@
 
 #instalando fontes
 echo "Installing Fonts and required apps"
-pacman -S ttf-font-awesome terminus-font htop xterm ranger scrot feh dmenu rofi --noconfirm
+pacman -S bash ttf-font-awesome terminus-font htop xterm ranger scrot feh dmenu rofi --noconfirm
 clear
 
 #If ~/.wallpaper exit then move wallpaper
