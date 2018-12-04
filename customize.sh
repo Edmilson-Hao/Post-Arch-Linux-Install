@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Test if the script was executed by root
-[[ $(id -u) -ne "0" ]] && exit 1
+[[ $(id -u) -ne "0" ]] && { echo "This script must be executed by root." ; exit 1; }
 
 #installing fonts and apps
 echo "Installing Fonts and required apps"
