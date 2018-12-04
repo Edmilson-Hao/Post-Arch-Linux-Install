@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#Test if the script was executed by root
+[[ $(id -u) -ne "0" ]] && exit 1
+
 #installing fonts and apps
 echo "Installing Fonts and required apps"
 pacman -S ttf-font-awesome terminus-font htop xterm ranger scrot feh dmenu rofi --noconfirm
