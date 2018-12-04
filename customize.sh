@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 cd /tmp
 #instalando fontes
 echo "Installing Fonts and required apps"
@@ -9,7 +11,7 @@ wget https://raw.githubusercontent.com/Edmilson-Hao/i3GapsConfig/master/config -
 clear
 
 echo "Downloading i3status config file"
-wget https://raw.githubusercontent.com/Edmilson-Hao/i3GapsConfig/master/i3status.conf -O i3status.conf
+wget https://raw.githubusercontent.com/Edmilson-Hao/i3GapsConfig/master/i3status.conf -O i3status.config
 clear
 
 echo "Downloading .Xdefaults configuration."
@@ -33,8 +35,9 @@ if [[ -e ~/.i3/config ]] ; then
 fi
 
 #If i3status config file exists make it a backup file
-if [[ -e /etc/i3status.conf ]] ; then
-  cp /etc/i3status.conf /etc/i3status.conf.backup
+if [[ -e /etc/i3status.config ]] ; then
+  cp /etc/i3status.config /etc/i3status.config.backup
+
 fi
 
 #If .Xdefaults exists make it a backup file
@@ -45,4 +48,4 @@ fi
 #Move config files
 mv config ~/.i3/config
 mv Xdefaults ~/.Xdefaults
-mv i3status.conf /etc/i3status.conf
+mv i3status.config /etc/i3status.config
