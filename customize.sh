@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#instalando fontes
+#installing fonts and apps
 echo "Installing Fonts and required apps"
 pacman -S ttf-font-awesome terminus-font htop xterm ranger scrot feh dmenu rofi --noconfirm
 clear
@@ -21,7 +21,6 @@ fi
 #If i3status config file exists make it a backup file
 if [[ -e /etc/i3status.conf ]] ; then
   cp /etc/i3status.conf /etc/i3status.conf.backup
-
 fi
 
 #If .Xdefaults exists make it a backup file
@@ -29,10 +28,10 @@ if [[ -e ~/.Xdefaults ]] ; then
   cp ~/.Xdefaults ~/.Xdefaults.backup
 fi
 
-
 #Move config files
 mv config ~/.i3/config
 mv Xdefaults ~/.Xdefaults
 mv i3status.conf /etc/i3status.conf
 
+#removing the folder
 cd .. ; rm -rf i3GapsConfig
