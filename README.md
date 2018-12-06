@@ -1,7 +1,20 @@
-# i3GapsConfig
-Configuration of i3gaps on Arch Linux (and it's based distributions).
+# ArchLinux Post install
+This script aims to be an easy way to configure a fresh Arch Linux install.
 
-When finished this script will install required fonts and setup some configuration files.
+The script will setup a minimal enviroment with i3-gaps window manager configured to work out of the box.
 
-Give it execute permission (chmod +x) and run as root. 
-It needs root privileges to run pacman -S.
+The script must have execute permission (chmod +x postarch.sh).
+You must run it as SUDO. Why? Because it will install somo packages with pacman :).
+
+List of packages installed by the script.
+1 - xf86-video-intel -> I will add AMD and Nvidia drivers later.
+2 - xf86-video-vesa -> As a fallback.
+3 - intel-ucode or amd-ucode -> Intel or AMD microcode.
+4 - ttf-font-awesome -> For the icons on i3status.
+5- terminus-font -> For system and terminal font.
+6 - htop.
+5 - xterm
+6 - ranger - As file manager.
+5 - scrot -> To take screenshots.
+6 - feh - to set wallpapers.
+7 - rofi - As the application launcher.
