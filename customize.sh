@@ -5,8 +5,17 @@
 
 #installing fonts and apps
 echo "Installing Fonts and required apps"
-pacman -S ttf-font-awesome terminus-font htop xterm ranger scrot feh dmenu rofi --noconfirm
+pacman -S ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps --noconfirm
+sleep 2
 clear
+
+#installing drivers
+echo "Installing drivers."
+[[ $(cat /proc/cpuinfo | grep GenuineIntel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa
+
+################################################################################################
+### Have to figure out if the system has a graphics card and wich grafics to install for it. ###
+################################################################################################
 
 #If ~/.wallpaper exit then move wallpaper
 if [[ -d ~/.wallpaper ]] ; then
