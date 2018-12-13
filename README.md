@@ -4,9 +4,9 @@ This script aims to be an easy way to configure a fresh Arch Linux install.
 The script will setup a minimal enviroment with i3-gaps window manager configured to work out of the box.
 
 The script must have execute permission (chmod +x postarch.sh).
-You must run it as SUDO. Why? Because it will install somo packages with pacman :).
+You must run it as toor to use pacman to install some packages.
 
-List of packages installed by the script.
+List of packages installed by the script.\n
 1 - xf86-video-intel -> I will add AMD and Nvidia drivers later.
 2 - xf86-video-vesa -> As a fallback.
 3 - intel-ucode or amd-ucode -> Intel or AMD microcode.
