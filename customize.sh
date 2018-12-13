@@ -37,7 +37,7 @@
 [[ $(id -u) -ne "0" ]] && { clear ; echo "This script must be executed by root." ; sleep 2 ; exit 1; }
 
 
-##########     Functions     ##########
+####################	Functions     ####################	
 
 function rank() {
 	#Installing pacman-contrib package for some useful scripts
@@ -53,10 +53,12 @@ function rank() {
 function installPackages() {
 	#Configuring basic system
 
-	!!!!!!!!!!!!!!!!enable multilib!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	#Enable multilib
+	echo "[multilib] >> /etc/pacman.conf"
+	echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
 	echo "Installing xorg and drivers."
-	sudo pacman -S xorg xorg-server xorg-xinit xorg-utils xorg-server-devel --noconfirm
+	sudo pacman -S xorg xorg-server xorg-fonts-100dpi xorg-xinit xorg-utils xorg-server-devel alsa-utils network-manager-applet networkmanager wireless-tools wpa-supplicant wpa-actiond dialog linux-headers --noconfirm
 
 
 	#installing intel drivers
@@ -65,31 +67,15 @@ function installPackages() {
 
 	#Install GPU driver. if=NVIDIA 		elif=AMD
 	if [[ $(lspci | grep -i NVIDIA) ]] ; then
-		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings --noconfirm
+		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings opencl-nvidia --noconfirm
 		#&& cp /root/xorg.conf.new /etc/X11/xorg.conf
 		[[ ! $(cat /usr/lib/modprobe.d/nvidia.conf | grep blacklist) ]] && echo "blacklist nouveau" >> /usr/lib/modprobe.d/nvidia.conf
-	#elif [[ $(lspci | grep -i AMD ]] ; then
-	#	pacman -S xf86-video-amdgpu --noconfirm
-
 	fi
 
-	nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+	if [[ $(lspci | grep -i AMD ]] ; then
+		pacman -S xf86-video-amdgpu --noconfirm
 
-	# xf86-video-nouveau lib32-nouveau-dri 
-
-	
-	
-	
-	linux-headers
-	linux-firmware
-	alsa-utils
-	xorg-fonts-100dpi
-	networkmanager
-	network-manager-applet
-	wireless-tools
-	wpa_supplicant
-	wpa_actiond
-	dialog
+	fi
 	
 	#installing fonts and apps
 	echo "Installing Fonts and required apps"
@@ -97,12 +83,6 @@ function installPackages() {
 	
 	sleep 2
 	clear
-}
-
-
-#removing the folder
-function remove() {
-	cd .. ; rm -rf i3GapsConfig
 }
 
 #Configuring dotfiles and wallpaper
@@ -139,3 +119,10 @@ function configWM() {
 	mv Xdefaults ~/.Xdefaults
 	mv i3status.conf /etc/i3status.conf
 }
+
+#removing the folder
+function remove() {
+	cd .. ; rm -rf i3GapsConfig
+}
+
+#####################################################################################
