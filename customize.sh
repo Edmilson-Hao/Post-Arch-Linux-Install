@@ -40,8 +40,9 @@
 ####################	Functions     ####################	
 
 function rank() {
+	clear
 	#Installing pacman-contrib package for some useful scripts
-	echo "Ranking mirros to get the 6 fastest fot your current location."
+	echo "Ranking mirros to get the 6 fastest for your current location."
 	pacman -S pacman-contrib --noconfirm
 
 	#Rank the 6 fastest mirrors for current location.
@@ -50,20 +51,23 @@ function rank() {
 
 }
 
+#Configuring basic system
 function installPackages() {
-	#Configuring basic system
+	clear
 
 	#Enable multilib
-	echo "[multilib] >> /etc/pacman.conf"
+	echo "[multilib]" >> /etc/pacman.conf
 	echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-
+	
+	#Installing xorg and basic packages
 	echo "Installing xorg and drivers."
-	sudo pacman -S xorg xorg-server xorg-fonts-100dpi xorg-xinit xorg-utils xorg-server-devel alsa-utils network-manager-applet networkmanager wireless-tools wpa-supplicant wpa-actiond dialog linux-headers --noconfirm
+	pacman -Sy xorg xorg-server xorg-fonts-100dpi xorg-xinit xorg-server-devel
+	pacman -Sy alsa-utils network-manager-applet networkmanager wireless-tools wpa-supplicant wpa-actiond dialog linux-headers
 
 
 	#installing intel drivers
 	echo "Installing drivers."
-	[[ $(cat /proc/cpuinfo | grep GenuineIntel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl --noconfirm
+	[[ $(cat /proc/cpuinfo | grep -i intel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl --noconfirm
 
 	#Install GPU driver. if=NVIDIA 		elif=AMD
 	if [[ $(lspci | grep -i NVIDIA) ]] ; then
@@ -72,7 +76,7 @@ function installPackages() {
 		[[ ! $(cat /usr/lib/modprobe.d/nvidia.conf | grep blacklist) ]] && echo "blacklist nouveau" >> /usr/lib/modprobe.d/nvidia.conf
 	fi
 
-	if [[ $(lspci | grep -i AMD ]] ; then
+	if [[ $(lspci | grep -i AMD) ]] ; then
 		pacman -S xf86-video-amdgpu --noconfirm
 
 	fi
@@ -80,14 +84,15 @@ function installPackages() {
 	#installing fonts and apps
 	echo "Installing Fonts and required apps"
 	pacman -S noto-fonts ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps --noconfirm
-	
+	read	
 	sleep 2
 	clear
 }
 
 #Configuring dotfiles and wallpaper
 function configWM() {
-	
+	clear
+
 	#If ~/.wallpaper exit then move wallpaper
 	if [[ -d ~/.wallpaper ]] ; then
 	  mv wallpaper.jpg ~/.wallpaper/wallpaper.jpg
@@ -124,5 +129,29 @@ function configWM() {
 function remove() {
 	cd .. ; rm -rf i3GapsConfig
 }
+#Menu
+function installerMenu(){
+	echo "************************************************************************"
+	echo "*         (1) - Rank mirrors.                                          *"
+	echo "*         (2) - Install packages.                                      *"
+	echo "*         (3) - Configure I3-gaps.                                     *"
+	echo "*         (4) - Exit.                                                  *"
+	echo "************************************************************************"
+}
 
 #####################################################################################
+
+clear
+option=1
+while [ $option -ne 5 ] ; do
+	clear
+	installerMenu
+	read option
+
+	case $option in	
+		1) rank ;;
+		2) installPackages ;;
+		3) configWM ;;
+		4) remove ; break ;;
+	esac
+done
