@@ -1,5 +1,3 @@
-#sed -i 's/#Server/Server/' mirrorlist
-
 #!/usr/bin/env bash
 #
 #
@@ -52,7 +50,7 @@ cat << EOF
 EOF
 }
 
-function menuMirros(){
+function menuMirrors(){
 cat << MIRRORLIST
 ______________________________________________________________________________________
 |       A                         |                       |          P               |
@@ -103,9 +101,11 @@ function getMirrors() {
 	#Backingup mirrorlist
 	cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	
-	selectMirror
+	menuMirrors
 	sleep 1
 	mv mirrorlist /etc/pacman.d/mirrorlist
+	sed -i 's/#Server/Server/' /etc/pacman.d/mirrorlist
+
 }
 
 
@@ -118,20 +118,21 @@ function installXorgDriver() {
 	echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 	
 	#Installing xorg
-	pacman -Sy xorg-server xorg-fonts-100dpi xorg-xinit xorg-server-devel alsa-utils network-manager-applet networkmanager wireless-tools wpa-supplicant wpa-actiond dialog linux-headers --noconfirm
+	pacman -Sy xorg xorg-server xorg-xinit 
+	
 
 	#installing intel drivers
-	[[ $(cat /proc/cpuinfo | grep -i intel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl --noconfirm
+	[[ $(cat /proc/cpuinfo | grep -i intel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl 
 
 	#Install GPU driver. if=NVIDIA 		elif=AMD
 	if [[ $(lspci | grep -i NVIDIA) ]] ; then
-		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings opencl-nvidia --noconfirm
+		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings opencl-nvidia 
 		#&& cp /root/xorg.conf.new /etc/X11/xorg.conf
 		[[ ! $(cat /usr/lib/modprobe.d/nvidia.conf | grep -i blacklist) ]] && echo "blacklist nouveau" >> /usr/lib/modprobe.d/nvidia.conf
 	fi
 
 	if [[ $(lspci | grep -i AMD) ]] ; then
-		pacman -S xf86-video-amdgpu --noconfirm
+		pacman -S xf86-video-amdgpu 
 
 	fi
 
@@ -140,7 +141,7 @@ function installXorgDriver() {
 #Installing Window Manager and Apps
 function installApps(){
 	#installing fonts and apps
-	pacman -S vim noto-fonts ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps --noconfirm
+	pacman -S vim noto-fonts ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils
 	read	
 	sleep 2
 	clear
@@ -199,7 +200,6 @@ function remove() {
 #Test if the script was executed by root
 [[ $(id -u) -ne "0" ]] && { clear ; echo "This script must be executed by the root user." ; sleep 2 ; exit 1; }
 
-clear
 option=1
 while [ $option -ne 5 ] ; do
 	clear
