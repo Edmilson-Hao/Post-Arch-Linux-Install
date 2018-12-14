@@ -30,73 +30,82 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 #
+####################	Variables	####################
+declare myUser
+########################################################
 
-####################	Functions     ####################	
+####################   Functions    ####################	
 
 #Menu
 function mainMenu(){
 cat << EOF
 
 
-          ________________________________________________________________________
-          |                                                                      |
-          |         (1) - Get mirrors.                                           |
-          |         (2) - Install xorg and drivers.                              |
-          |         (3) - Install i3-gaps and apps.                              |
-          |         (4) - Configure dotfiles.                                    |
-          |         (5) - Create user and configure sudo.                        |
-          |         (6) - Exit.                                                  |
-          |______________________________________________________________________|
+          
+
+                    ________________________________________________________________________
+                    |                                                                      |
+                    |         (1) - Get mirrors.                                           |
+                    |         (2) - Install xorg and drivers.                              |
+                    |         (3) - Install i3-gaps and apps.                              |
+                    |         (4) - Configure dotfiles.                                    |
+                    |         (5) - Create user and configure sudo.                        |
+                    |         (6) - Exit.                                                  |
+                    |______________________________________________________________________|
 EOF
 }
 
 function menuMirrors(){
 cat << MIRRORLIST
-______________________________________________________________________________________
-|       A                         |                       |          P               |
-|(AU) - Australia                 | (HU) - Hungary        | (PT) - Portugal          |
-|(AT) - Austria                   |        I              |        Q                 |
-|       B                         | (IS) - Iceland        | (QA) - Qatar             |
-|(BD) - Bangladesh                | (IN) - India          |        R                 |
-|(BY) - Belarus                   | (ID) - Indonesia      | (RO) - Romania           |
-|(BE) - Belgium                   | (IR) - Iran           | (RU) - Russia            |
-|(BA) - Bosnia and Herzegovina    | (IE) - Ireland        |        S                 |
-|(BR) - Brazil                    | (IL) - Israel         | (RS) - Serbia            |
-|(BG) - Bulgaria                  | (IT) - Italy          | (SG) - Singapore         |
-|       C                         |        J              | (SK) - Slovakia          |
-|(CA) - Canada                    | (JP) - Japan          | (SI) - Slovenia          |
-|(CL) - Chile                     |        K              | (ZA) - South Africa      |
-|(CN) - China                     | (KZ) - Kazakhstan     | (KR) - South Korea       |
-|(CO) - Colombia                  | (KE) - Kenya          | (ES) - Spain             |
-|(HR) - Croatia                   |        L              | (SE) - Sweden            |
-|(CZ) - Czechia                   | (LV) - Latvia         | (CH) - Switzerland       |
-|       D                         | (LT) - Lithuania      |        T                 |
-|(DK) - Denmark                   | (LU) - Luxembourg     | (TW) - Taiwan            |
-|       E                         |        M              | (TH) - Thailand          |
-|(EC) - Ecuador                   | (MK) - Macedonia      | (TR) - Turkey            |
-|       F                         | (MX) - Mexico         | (UA) - Ukraine           |
-|(FI) - Finland                   |        N              | (GB) - United Kingdom    |
-|(FR) - France                    | (NL) - Netherlands    | (US) - United States     |
-|       G                         | (NC) - New Caledonia  | (VN) - Vietnam           |
-|(GE) - Georgia                   | (NZ) - New Zealand    |                          |
-|(DE) - Germany                   | (NO) - Norway         |                          |
-|(GR) - Greece                    |        P              |                          |
-|       H                         | (PY) - Paraguay       |                          |
-|(HK) - Hong Kong                 | (PH) - Philippines    |                          |
-|(HU) - Hungary                   | (PL) - Poland         |                          |
-|____________________________________________________________________________________|
 
-Select your mirror: 
+
+
+
+
+                    ______________________________________________________________________________________
+                    |       A                         |                       |          P               |
+                    |(AU) - Australia                 | (HU) - Hungary        | (PT) - Portugal          |
+                    |(AT) - Austria                   |        I              |        Q                 |
+                    |       B                         | (IS) - Iceland        | (QA) - Qatar             |
+                    |(BD) - Bangladesh                | (IN) - India          |        R                 |
+                    |(BY) - Belarus                   | (ID) - Indonesia      | (RO) - Romania           |
+                    |(BE) - Belgium                   | (IR) - Iran           | (RU) - Russia            |
+                    |(BA) - Bosnia and Herzegovina    | (IE) - Ireland        |        S                 |
+                    |(BR) - Brazil                    | (IL) - Israel         | (RS) - Serbia            |
+                    |(BG) - Bulgaria                  | (IT) - Italy          | (SG) - Singapore         |
+                    |       C                         |        J              | (SK) - Slovakia          |
+                    |(CA) - Canada                    | (JP) - Japan          | (SI) - Slovenia          |
+                    |(CL) - Chile                     |        K              | (ZA) - South Africa      |
+                    |(CN) - China                     | (KZ) - Kazakhstan     | (KR) - South Korea       |
+                    |(CO) - Colombia                  | (KE) - Kenya          | (ES) - Spain             |
+                    |(HR) - Croatia                   |        L              | (SE) - Sweden            |
+                    |(CZ) - Czechia                   | (LV) - Latvia         | (CH) - Switzerland       |
+                    |       D                         | (LT) - Lithuania      |        T                 |
+                    |(DK) - Denmark                   | (LU) - Luxembourg     | (TW) - Taiwan            |
+                    |       E                         |        M              | (TH) - Thailand          |
+                    |(EC) - Ecuador                   | (MK) - Macedonia      | (TR) - Turkey            |
+                    |       F                         | (MX) - Mexico         | (UA) - Ukraine           |
+                    |(FI) - Finland                   |        N              | (GB) - United Kingdom    |
+                    |(FR) - France                    | (NL) - Netherlands    | (US) - United States     |
+                    |       G                         | (NC) - New Caledonia  | (VN) - Vietnam           |
+                    |(GE) - Georgia                   | (NZ) - New Zealand    |                          |
+                    |(DE) - Germany                   | (NO) - Norway         |                          |
+                    |(GR) - Greece                    |        P              |                          |
+                    |       H                         | (PY) - Paraguay       |                          |
+                    |(HK) - Hong Kong                 | (PH) - Philippines    |                          |
+                    |(HU) - Hungary                   | (PL) - Poland         |                          |
+                    |____________________________________________________________________________________|
+
+Select your mirror (BR): 
 MIRRORLIST
-read mirrorOption
+read -r mirrorOption
+[[ $option -eq "" ]] && mirrorOption=BR
 
 curl -o mirrorlist https://www.archlinux.org/mirrorlist/?country=$mirrorOption&protocol=http&protocol=https&ip_version=4
 sleep 1
 }
 
 function getMirrors() {
-	urlOne="https://www.archlinux.org/mirrorlist/?country="
-	urlTwo="&protocol=http&protocol=https&ip_version=4"
 	clear
 	#Backingup mirrorlist
 	cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -141,7 +150,7 @@ function installXorgDriver() {
 #Installing Window Manager and Apps
 function installApps(){
 	#installing fonts and apps
-	pacman -S vim noto-fonts ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils
+	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils
 	read	
 	sleep 2
 	clear
@@ -151,17 +160,17 @@ function installApps(){
 function configWM() {
 	clear
 
-	#If ~/.wallpaper exit then move wallpaper
-	if [[ -d ~/.wallpaper ]] ; then
-	  mv wallpaper.jpg ~/.wallpaper/wallpaper.jpg
+	#If /home/$myUser/wallpaper exit then move wallpaper
+	if [[ -d /home/$myUser/.wallpaper ]] ; then
+	  mv wallpaper.jpg /home/$myUser/wallpaper/wallpaper.jpg
 	else
-	  mkdir -p ~/.wallpaper
-	  mv wallpaper.jpg ~/.wallpaper/wallpaper.jpg
+	  mkdir -p /home/$myUser/.wallpaper
+	  mv wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
 	fi
 	
 	#If i3 config file exists make it a backup file
-	if [[ -e ~/.i3/config ]] ; then
-	  cp ~/.i3/config ~/.i3/config.backup
+	if [[ -e /home/$myUser/.i3/config ]] ; then
+	  cp /home/$myUser/i3/config /home/$myUser/i3/config.backup
 	fi
 	
 	#If i3status config file exists make it a backup file
@@ -170,16 +179,16 @@ function configWM() {
 	fi
 	
 	#If .Xdefaults exists make it a backup file
-	if [[ -e ~/.Xdefaults ]] ; then
-	  cp ~/.Xdefaults ~/.Xdefaults.backup
+	if [[ -e /home/$myUser/Xdefaults ]] ; then
+	  cp /home/$myUser/Xdefaults /home/$myUser/Xdefaults.backup
 	fi
 	
 	configurar teclado
 	hostnamectl set-hostname arch
 
 	#Move config files
-	mv config ~/.i3/config
-	mv Xdefaults ~/.Xdefaults
+	mv config /home/$myUser/i3/config
+	mv Xdefaults /home/$myUser/Xdefaults
 	mv i3status.conf /etc/i3status.conf
 }
 
