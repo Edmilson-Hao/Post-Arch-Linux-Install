@@ -30,9 +30,6 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 #
-####################	Variables	####################
-declare myUser
-########################################################
 
 ####################   Functions    ####################	
 
@@ -96,10 +93,9 @@ cat << MIRRORLIST
                     |(HU) - Hungary                   | (PL) - Poland         |                          |
                     |____________________________________________________________________________________|
 
-Select your mirror (BR): 
+Select your mirror: 
 MIRRORLIST
 read -r mirrorOption
-[[ $option -eq "" ]] && mirrorOption=BR
 
 curl -o mirrorlist https://www.archlinux.org/mirrorlist/?country=$mirrorOption&protocol=http&protocol=https&ip_version=4
 sleep 1
@@ -151,7 +147,6 @@ function installXorgDriver() {
 function installApps(){
 	#installing fonts and apps
 	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils
-	read	
 	sleep 2
 	clear
 }
@@ -159,44 +154,31 @@ function installApps(){
 #Configuring dotfiles and wallpaper
 function configWM() {
 	clear
+	global myUser=hao
 
-	#If /home/$myUser/wallpaper exit then move wallpaper
-	if [[ -d /home/$myUser/.wallpaper ]] ; then
-	  mv wallpaper.jpg /home/$myUser/wallpaper/wallpaper.jpg
-	else
-	  mkdir -p /home/$myUser/.wallpaper
-	  mv wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
-	fi
-	
-	#If i3 config file exists make it a backup file
-	if [[ -e /home/$myUser/.i3/config ]] ; then
-	  cp /home/$myUser/i3/config /home/$myUser/i3/config.backup
-	fi
-	
-	#If i3status config file exists make it a backup file
-	if [[ -e /etc/i3status.conf ]] ; then
-	  cp /etc/i3status.conf /etc/i3status.conf.backup
-	fi
-	
-	#If .Xdefaults exists make it a backup file
-	if [[ -e /home/$myUser/Xdefaults ]] ; then
-	  cp /home/$myUser/Xdefaults /home/$myUser/Xdefaults.backup
-	fi
-	
-	configurar teclado
-	hostnamectl set-hostname arch
+	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArchLinuxInstall/master/wallpaper.jpg
+	mkdir -p /home/$myUser/.wallpaper
+	cp -v wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
 
-	#Move config files
-	mv config /home/$myUser/i3/config
-	mv Xdefaults /home/$myUser/Xdefaults
-	mv i3status.conf /etc/i3status.conf
+	#exec feh --bg-scale /home/$myUser/.wallpaper/wallpaper.jpg
+	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/Xdefaults
+	cp -v Xdefaults /home/$myUser/.Xdefaults
+
+	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/config
+	cp -v config /home/$myUser/.config/i3/config
+
+	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/i3status.conf
+	cp -v i3status.conf /etc/i3status.conf
+
 }
 
 function createUser(){
 	echo "Enter your user name: "
 	read myUser
 	useradd -m -g wheel -G video,storage,scanner,optical,kvm,input,floppy,disk,audio -s /bin/bash $myUser
+	pacman -S sudo
 	passwd $myUser
+	sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 }
 
 #removing the folder
@@ -210,7 +192,7 @@ function remove() {
 [[ $(id -u) -ne "0" ]] && { clear ; echo "This script must be executed by the root user." ; sleep 2 ; exit 1; }
 
 option=1
-while [ $option -ne 5 ] ; do
+while [ $option -ne 6 ] ; do
 	clear
 	mainMenu
 	read option
