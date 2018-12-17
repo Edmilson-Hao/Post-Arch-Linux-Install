@@ -30,25 +30,26 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 #
+global myUser
 
-####################   Functions    ####################	
+####################   Functions    ####################
 
 #Menu
 function mainMenu(){
 cat << EOF
 
 
-          
 
-                    ________________________________________________________________________
-                    |                                                                      |
-                    |         (1) - Get mirrors.                                           |
-                    |         (2) - Install xorg and drivers.                              |
-                    |         (3) - Install i3-gaps and apps.                              |
-                    |         (4) - Configure dotfiles.                                    |
-                    |         (5) - Create user and configure sudo.                        |
-                    |         (6) - Exit.                                                  |
-                    |______________________________________________________________________|
+
+                                        ________________________________________________________________________
+                                        |                                                                      |
+                                        |         (1) - Get mirrors.                                           |
+                                        |         (2) - Install xorg and drivers.                              |
+                                        |         (3) - Install i3-gaps and apps.                              |
+                                        |         (4) - Configure dotfiles.                                    |
+                                        |         (5) - Create user and configure sudo.                        |
+                                        |         (6) - Exit.                                                  |
+                                        |______________________________________________________________________|
 EOF
 }
 
@@ -59,41 +60,41 @@ cat << MIRRORLIST
 
 
 
-                    ______________________________________________________________________________________
-                    |       A                         |                       |          P               |
-                    |(AU) - Australia                 | (HU) - Hungary        | (PT) - Portugal          |
-                    |(AT) - Austria                   |        I              |        Q                 |
-                    |       B                         | (IS) - Iceland        | (QA) - Qatar             |
-                    |(BD) - Bangladesh                | (IN) - India          |        R                 |
-                    |(BY) - Belarus                   | (ID) - Indonesia      | (RO) - Romania           |
-                    |(BE) - Belgium                   | (IR) - Iran           | (RU) - Russia            |
-                    |(BA) - Bosnia and Herzegovina    | (IE) - Ireland        |        S                 |
-                    |(BR) - Brazil                    | (IL) - Israel         | (RS) - Serbia            |
-                    |(BG) - Bulgaria                  | (IT) - Italy          | (SG) - Singapore         |
-                    |       C                         |        J              | (SK) - Slovakia          |
-                    |(CA) - Canada                    | (JP) - Japan          | (SI) - Slovenia          |
-                    |(CL) - Chile                     |        K              | (ZA) - South Africa      |
-                    |(CN) - China                     | (KZ) - Kazakhstan     | (KR) - South Korea       |
-                    |(CO) - Colombia                  | (KE) - Kenya          | (ES) - Spain             |
-                    |(HR) - Croatia                   |        L              | (SE) - Sweden            |
-                    |(CZ) - Czechia                   | (LV) - Latvia         | (CH) - Switzerland       |
-                    |       D                         | (LT) - Lithuania      |        T                 |
-                    |(DK) - Denmark                   | (LU) - Luxembourg     | (TW) - Taiwan            |
-                    |       E                         |        M              | (TH) - Thailand          |
-                    |(EC) - Ecuador                   | (MK) - Macedonia      | (TR) - Turkey            |
-                    |       F                         | (MX) - Mexico         | (UA) - Ukraine           |
-                    |(FI) - Finland                   |        N              | (GB) - United Kingdom    |
-                    |(FR) - France                    | (NL) - Netherlands    | (US) - United States     |
-                    |       G                         | (NC) - New Caledonia  | (VN) - Vietnam           |
-                    |(GE) - Georgia                   | (NZ) - New Zealand    |                          |
-                    |(DE) - Germany                   | (NO) - Norway         |                          |
-                    |(GR) - Greece                    |        P              |                          |
-                    |       H                         | (PY) - Paraguay       |                          |
-                    |(HK) - Hong Kong                 | (PH) - Philippines    |                          |
-                    |(HU) - Hungary                   | (PL) - Poland         |                          |
-                    |____________________________________________________________________________________|
+                              ______________________________________________________________________________________
+                              |       A                         |                       |          P               |
+                              |(AU) - Australia                 | (HU) - Hungary        | (PT) - Portugal          |
+                              |(AT) - Austria                   |        I              |        Q                 |
+                              |       B                         | (IS) - Iceland        | (QA) - Qatar             |
+                              |(BD) - Bangladesh                | (IN) - India          |        R                 |
+                              |(BY) - Belarus                   | (ID) - Indonesia      | (RO) - Romania           |
+                              |(BE) - Belgium                   | (IR) - Iran           | (RU) - Russia            |
+                              |(BA) - Bosnia and Herzegovina    | (IE) - Ireland        |        S                 |
+                              |(BR) - Brazil                    | (IL) - Israel         | (RS) - Serbia            |
+                              |(BG) - Bulgaria                  | (IT) - Italy          | (SG) - Singapore         |
+                              |       C                         |        J              | (SK) - Slovakia          |
+                              |(CA) - Canada                    | (JP) - Japan          | (SI) - Slovenia          |
+                              |(CL) - Chile                     |        K              | (ZA) - South Africa      |
+                              |(CN) - China                     | (KZ) - Kazakhstan     | (KR) - South Korea       |
+                              |(CO) - Colombia                  | (KE) - Kenya          | (ES) - Spain             |
+                              |(HR) - Croatia                   |        L              | (SE) - Sweden            |
+                              |(CZ) - Czechia                   | (LV) - Latvia         | (CH) - Switzerland       |
+                              |       D                         | (LT) - Lithuania      |        T                 |
+                              |(DK) - Denmark                   | (LU) - Luxembourg     | (TW) - Taiwan            |
+                              |       E                         |        M              | (TH) - Thailand          |
+                              |(EC) - Ecuador                   | (MK) - Macedonia      | (TR) - Turkey            |
+                              |       F                         | (MX) - Mexico         | (UA) - Ukraine           |
+                              |(FI) - Finland                   |        N              | (GB) - United Kingdom    |
+                              |(FR) - France                    | (NL) - Netherlands    | (US) - United States     |
+                              |       G                         | (NC) - New Caledonia  | (VN) - Vietnam           |
+                              |(GE) - Georgia                   | (NZ) - New Zealand    |                          |
+                              |(DE) - Germany                   | (NO) - Norway         |                          |
+                              |(GR) - Greece                    |        P              |                          |
+                              |       H                         | (PY) - Paraguay       |                          |
+                              |(HK) - Hong Kong                 | (PH) - Philippines    |                          |
+                              |(HU) - Hungary                   | (PL) - Poland         |                          |
+                              |____________________________________________________________________________________|
 
-Select your mirror: 
+Select your mirror:
 MIRRORLIST
 read -r mirrorOption
 
@@ -105,7 +106,7 @@ function getMirrors() {
 	clear
 	#Backingup mirrorlist
 	cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-	
+
 	menuMirrors
 	sleep 1
 	mv mirrorlist /etc/pacman.d/mirrorlist
@@ -121,23 +122,23 @@ function installXorgDriver() {
 	#Enable multilib
 	echo "[multilib]" >> /etc/pacman.conf
 	echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-	
+
 	#Installing xorg
-	pacman -Sy xorg xorg-server xorg-xinit 
-	
+	pacman -Sy xorg xorg-server xorg-xinit xorg-xrdb
+
 
 	#installing intel drivers
-	[[ $(cat /proc/cpuinfo | grep -i intel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl 
+	[[ $(cat /proc/cpuinfo | grep -i intel) ]] && pacman -S xf86-video-intel intel-ucode xf86-video-vesa lib32-intel-dri lib32-mesa lib32-libgl
 
 	#Install GPU driver. if=NVIDIA 		elif=AMD
 	if [[ $(lspci | grep -i NVIDIA) ]] ; then
-		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings opencl-nvidia 
+		pacman -S nvidia nvidia-libgl nvidia-utils nvidia-settings opencl-nvidia
 		#&& cp /root/xorg.conf.new /etc/X11/xorg.conf
 		[[ ! $(cat /usr/lib/modprobe.d/nvidia.conf | grep -i blacklist) ]] && echo "blacklist nouveau" >> /usr/lib/modprobe.d/nvidia.conf
 	fi
 
 	if [[ $(lspci | grep -i AMD) ]] ; then
-		pacman -S xf86-video-amdgpu 
+		pacman -S xf86-video-amdgpu
 
 	fi
 
@@ -146,7 +147,7 @@ function installXorgDriver() {
 #Installing Window Manager and Apps
 function installApps(){
 	#installing fonts and apps
-	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils
+	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils compton firefox
 	sleep 2
 	clear
 }
@@ -154,18 +155,19 @@ function installApps(){
 #Configuring dotfiles and wallpaper
 function configWM() {
 	clear
-	global myUser=hao
+  echo "Enter the username: "
+  read -r myUser
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArchLinuxInstall/master/wallpaper.jpg
-	mkdir -p /home/$myUser/.wallpaper
-	cp -v wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
+	mkdir -p /usr/share/wallpaper
+	cp -v wallpaper.jpg /usr/share/wallpaper/wallpaper.jpg
 
-	#exec feh --bg-scale /home/$myUser/.wallpaper/wallpaper.jpg
+	exec feh --bg-scale /usr/share/wallpaper/wallpapper.jpg
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/Xdefaults
 	cp -v Xdefaults /home/$myUser/.Xdefaults
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/config
-	cp -v config /home/$myUser/.config/i3/config
+	cp -v config /etc/i3
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/i3status.conf
 	cp -v i3status.conf /etc/i3status.conf
@@ -173,12 +175,15 @@ function configWM() {
 }
 
 function createUser(){
-	echo "Enter your user name: "
-	read myUser
-	useradd -m -g wheel -G video,storage,scanner,optical,kvm,input,floppy,disk,audio -s /bin/bash $myUser
-	pacman -S sudo
-	passwd $myUser
-	sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+  	echo "Enter your user name: "
+    read myUser
+    useradd -m -g wheel -G video,storage,scanner,optical,kvm,input,floppy,disk,audio -s /bin/bash $myUser
+
+    pacman -S sudo
+    echo "exec i3" >> /home/$myUser/.xinitrc
+    echo "startx" >> /home/$myUser/.bash_profile
+  	passwd $myUser
+  	sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 }
 
 #removing the folder
@@ -197,7 +202,7 @@ while [ $option -ne 6 ] ; do
 	mainMenu
 	read option
 
-	case $option in	
+	case $option in
 		1) getMirrors ;;
 		2) installXorgDriver ;;
 		3) installApps ;;
