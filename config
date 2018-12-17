@@ -6,7 +6,7 @@
 
 #=======================================================My Changes========================================================
 #Set Wallpaper
-exec feh --bg-scale /home/hao/.wallpaper/wallpaper.jpg
+exec feh --bg-scale /usr/share/wallpaper/wallpaper.jpg
 
 #set Super/Windows Key as Mod Key
 set $mod Mod4
