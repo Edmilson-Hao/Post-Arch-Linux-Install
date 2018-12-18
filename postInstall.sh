@@ -46,8 +46,8 @@ cat << EOF
                                         |         (1) - Get mirrors.                                           |
                                         |         (2) - Install xorg and drivers.                              |
                                         |         (3) - Install i3-gaps and apps.                              |
-                                        |         (4) - Configure dotfiles.                                    |
-                                        |         (5) - Create user and configure sudo.                        |
+                                        |         (4) - Create user and configure sud.                         |
+                                        |         (5) - Configure dotfiles.                                    |
                                         |         (6) - Exit.                                                  |
                                         |______________________________________________________________________|
 EOF
@@ -153,21 +153,21 @@ function installApps(){
 }
 
 #Configuring dotfiles and wallpaper
-function configWM() {
+function configureWM() {
 	clear
   echo "Enter the username: "
   read -r myUser
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArchLinuxInstall/master/wallpaper.jpg
-	mkdir -p /usr/share/wallpaper
-	cp -v wallpaper.jpg /usr/share/wallpaper/wallpaper.jpg
+	mkdir -p /home/$myUser/.wallpaper
+	cp -v wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
 
-	exec feh --bg-scale /usr/share/wallpaper/wallpapper.jpg
+	#exec feh --bg-scale /home/$myUser/.wallpaper/wallpaper.jpg
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/Xdefaults
 	cp -v Xdefaults /home/$myUser/.Xdefaults
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/config
-	cp -v config /etc/i3
+	cp -v config /home/$myUser/.config/i3/config
 
 	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/i3status.conf
 	cp -v i3status.conf /etc/i3status.conf
@@ -206,8 +206,8 @@ while [ $option -ne 6 ] ; do
 		1) getMirrors ;;
 		2) installXorgDriver ;;
 		3) installApps ;;
-		4) configWM ;;
-		5) createUser ;;
+		4) createUser ;;
+		5) configureWM ;;
 		6) remove ; break ;;
 	esac
 done
