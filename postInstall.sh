@@ -147,7 +147,7 @@ function installXorgDriver() {
 #Installing Window Manager and Apps
 function installApps(){
 	#installing fonts and apps
-	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils compton firefox
+	pacman -S vim ttf-font-awesome terminus-font htop xterm ranger scrot feh rofi rxvt-unicode i3status i3-gaps alsa-utils compton firefox arc-gtk-theme lxappearance papirus-icon-theme
 	sleep 2
 	clear
 }
