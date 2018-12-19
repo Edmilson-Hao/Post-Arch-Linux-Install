@@ -60,7 +60,7 @@ cat << MIRRORLIST
 
 
 
-                              ______________________________________________________________________________________
+                               ____________________________________________________________________________________
                               |       A                         |                       |          P               |
                               |(AU) - Australia                 | (HU) - Hungary        | (PT) - Portugal          |
                               |(AT) - Austria                   |        I              |        Q                 |
@@ -152,28 +152,6 @@ function installApps(){
 	clear
 }
 
-#Configuring dotfiles and wallpaper
-function configureWM() {
-	clear
-  echo "Enter the username: "
-  read -r myUser
-
-	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArchLinuxInstall/master/wallpaper.jpg
-	mkdir -p /home/$myUser/.wallpaper
-	cp -v wallpaper.jpg /home/$myUser/.wallpaper/wallpaper.jpg
-
-	#exec feh --bg-scale /home/$myUser/.wallpaper/wallpaper.jpg
-	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/Xdefaults
-	cp -v Xdefaults /home/$myUser/.Xdefaults
-
-	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/config
-	cp -v config /home/$myUser/.config/i3/config
-
-	wget https://raw.githubusercontent.com/Edmilson-Hao/PostArch/master/i3status.conf
-	cp -v i3status.conf /etc/i3status.conf
-
-}
-
 function createUser(){
   	echo "Enter your user name: "
     read myUser
@@ -184,11 +162,6 @@ function createUser(){
     echo "startx" >> /home/$myUser/.bash_profile
   	passwd $myUser
   	sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
-}
-
-#removing the folder
-function remove() {
-	cd .. ; rm -rf i3GapsConfig
 }
 
 #####################################################################################
@@ -207,7 +180,6 @@ while [ $option -ne 6 ] ; do
 		2) installXorgDriver ;;
 		3) installApps ;;
 		4) createUser ;;
-		5) configureWM ;;
-		6) remove ; break ;;
+		5) remove ; break ;;
 	esac
 done
